@@ -6,11 +6,17 @@ const {
   getReview,
   getServices,
   getService,
+  getAdvantages,
+  getBenefits
 } = require("../controllers/planes");
 
 const router = express.Router();
 
 const path = require("path");
+
+router.get("/advantages", getAdvantages);
+
+router.get("/benefits", getBenefits);
 
 router.get("/team", getTeams);
 

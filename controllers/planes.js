@@ -1,4 +1,10 @@
-const { Team, Reviews, Services } = require("../modles/planes");
+const {
+  Team,
+  Reviews,
+  Services,
+  Advantages,
+  Benefits,
+} = require("../modles/planes");
 
 /**
  * @param {*} req
@@ -10,13 +16,10 @@ const getTeams = async (req, res) => {
 
     res.status(200).json(planes);
   } catch (error) {
-    console.error("Error fetching tours:", error);
-    res
-      .status(500)
-      .json({
-        message:
-          "Не удалось получить список экскурсий, повторите попытку позднее",
-      });
+    console.error("Error fetching team:", error);
+    res.status(500).json({
+      message: "Не удалось получить список учителей, повторите попытку позднее",
+    });
   }
 };
 
@@ -30,12 +33,10 @@ const getReviews = async (req, res) => {
 
     res.status(200).json(blog);
   } catch (error) {
-    console.error("Error fetching blogs:", error);
-    res
-      .status(500)
-      .json({
-        message: "Не удалось получить список блогов, повторите попытку позднее",
-      });
+    console.error("Error fetching reviews:", error);
+    res.status(500).json({
+      message: "Не удалось получить список отзывов, повторите попытку позднее",
+    });
   }
 };
 
@@ -50,11 +51,44 @@ const getServices = async (req, res) => {
     res.status(200).json(blog);
   } catch (error) {
     console.error("Error fetching blogs:", error);
-    res
-      .status(500)
-      .json({
-        message: "Не удалось получить список блогов, повторите попытку позднее",
-      });
+    res.status(500).json({
+      message: "Не удалось получить список блогов, повторите попытку позднее",
+    });
+  }
+};
+
+/**
+ * @param {*} req
+ * @param {*} res
+ */
+const getAdvantages = async (req, res) => {
+  try {
+    const advantages = await Advantages.find();
+
+    res.status(200).json(advantages);
+  } catch (error) {
+    console.error("Error fetching advantages:", error);
+    res.status(500).json({
+      message: "Не удалось получить список услуг, повторите попытку позднее",
+    });
+  }
+};
+
+/**
+ * @param {*} req
+ * @param {*} res
+ */
+const getBenefits = async (req, res) => {
+  try {
+    const benefits = await Benefits.find();
+
+    res.status(200).json(benefits);
+  } catch (error) {
+    console.error("Error fetching benefits:", error);
+    res.status(500).json({
+      message:
+        "Не удалось получить список преимуществ, повторите попытку позднее",
+    });
   }
 };
 
@@ -68,8 +102,8 @@ const getTeam = async (req, res) => {
 
     res.status(200).json(plane);
   } catch (error) {
-    console.error("Error fetching tour:", error);
-    res.status(404).json({ message: "Тур не найден" });
+    console.error("Error fetching team:", error);
+    res.status(404).json({ message: "Учитель не найден" });
   }
 };
 
@@ -83,8 +117,8 @@ const getReview = async (req, res) => {
 
     res.status(200).json(plane);
   } catch (error) {
-    console.error("Error fetching tour:", error);
-    res.status(404).json({ message: "Тур не найден" });
+    console.error("Error fetching reviews:", error);
+    res.status(404).json({ message: "Отзыв не найден" });
   }
 };
 
@@ -99,7 +133,7 @@ const getService = async (req, res) => {
     res.status(200).json(plane);
   } catch (error) {
     console.error("Error fetching tour:", error);
-    res.status(404).json({ message: "Тур не найден" });
+    res.status(404).json({ message: "Услуга не найдена" });
   }
 };
 
@@ -110,4 +144,6 @@ module.exports = {
   getReview,
   getServices,
   getService,
+  getAdvantages,
+  getBenefits,
 };
